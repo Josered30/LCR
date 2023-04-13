@@ -2,6 +2,8 @@ import { GameController } from './game-controller';
 
 import readline from 'readline/promises';
 
+const END_TOKEN = '0';
+
 type GameOptions = {
   playerCount: number;
   rolls: string;
@@ -21,7 +23,7 @@ async function userInput(): Promise<GameOptions[]> {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const response = (await read.question('')).toUpperCase();
-    if (response === '0') {
+    if (response === END_TOKEN) {
       break;
     }
 
