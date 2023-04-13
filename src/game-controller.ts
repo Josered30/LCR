@@ -14,6 +14,7 @@ export class GameController {
     this.initialChips = 3;
     this.centerPile = 0;
     this.currentPlayerIndex = 0;
+    // eslint-disable-next-line no-useless-escape
     this.validationRegex = /^[LR\.C]*$/gm;
   }
 
@@ -28,6 +29,7 @@ export class GameController {
       return;
     }
 
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       const player = this.players[this.currentPlayerIndex];
 
@@ -37,8 +39,9 @@ export class GameController {
 
       currentRollList.forEach((roll) => {
         switch (roll) {
-          case GameRuleEnum.PASS_LEFT:
+          case GameRuleEnum.PASS_LEFT: {
             let leftPlayerIndex = this.currentPlayerIndex + 1;
+
             if (leftPlayerIndex >= this.players.length) {
               leftPlayerIndex = leftPlayerIndex % (this.players.length - 1);
             }
@@ -47,18 +50,22 @@ export class GameController {
             this.players[leftPlayerIndex].addChip();
 
             break;
-          case GameRuleEnum.PASS_RIGHT:
+          }
+          case GameRuleEnum.PASS_RIGHT: {
             const rightPlayerIndex = this.currentPlayerIndex - 1;
 
             this.players.at(this.currentPlayerIndex)?.removeChip();
             this.players.at(rightPlayerIndex)?.addChip();
             break;
-          case GameRuleEnum.PASS_CENTER:
+          }
+          case GameRuleEnum.PASS_CENTER: {
             this.players[this.currentPlayerIndex].removeChip();
             this.centerPile += 1;
             break;
-          case GameRuleEnum.NONE:
+          }
+          case GameRuleEnum.NONE: {
             break;
+          }
         }
       });
 

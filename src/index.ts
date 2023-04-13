@@ -15,8 +15,10 @@ async function userInput(): Promise<GameOptions[]> {
   });
 
   const gameOptions: GameOptions[] = [];
+  // eslint-disable-next-line no-useless-escape
   const inputValidationRegex = /^\d\s[LR\.C]*$/gm;
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const response = (await read.question('')).toUpperCase();
     if (response === '0') {
