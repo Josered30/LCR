@@ -48,6 +48,7 @@
             }
         }
     ]
+    }
 }
     ``` 
 5.  Install proyect dependencies in each subproject.
