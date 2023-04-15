@@ -15,42 +15,42 @@
 4.  Check the deployment
     ```
     aws cloudformation describe-stacks --stack-name lcr
-    
+
     {
-    "Stacks": [
-        {
-            "StackId": "arn:aws:cloudformation:us-east-1:905802233663:stack/lcr/3e9b2320-db04-11ed-b682-0a41fe0ace1b",
-            "StackName": "lcr",
-            "ChangeSetId": "arn:aws:cloudformation:us-east-1:905802233663:changeSet/awscli-cloudformation-package-deploy-1681516020/1def64ad-6713-439b-88da-5f707fea663a",
-            "Description": "Creating DynamoDB tables with CloudFormation",
-            "CreationTime": "2023-04-14T20:37:59.636000+00:00",
-            "LastUpdatedTime": "2023-04-14T23:47:12.385000+00:00",
-            "RollbackConfiguration": {},
-            "StackStatus": "UPDATE_COMPLETE",
-            "DisableRollback": false,
-            "NotificationARNs": [],
-            "Outputs": [
-                {
-                    "OutputKey": "Player",
-                    "OutputValue": "Player",
-                    "Description": "Player table"
-                },
-                {
-                    "OutputKey": "Game",
-                    "OutputValue": "Game",
-                    "Description": "Game table"
+        "Stacks": [
+            {
+                "StackId": "arn:aws:cloudformation:us-east-1:905802233663:stack/lcr/3e9b2320-db04-11ed-b682-0a41fe0ace1b",
+                "StackName": "lcr",
+                "ChangeSetId": "arn:aws:cloudformation:us-east-1:905802233663:changeSet/awscli-cloudformation-package-deploy-1681516020/1def64ad-6713-439b-88da-5f707fea663a",
+                "Description": "Creating DynamoDB tables with CloudFormation",
+                "CreationTime": "2023-04-14T20:37:59.636000+00:00",
+                "LastUpdatedTime": "2023-04-14T23:47:12.385000+00:00",
+                "RollbackConfiguration": {},
+                "StackStatus": "UPDATE_COMPLETE",
+                "DisableRollback": false,
+                "NotificationARNs": [],
+                "Outputs": [
+                    {
+                        "OutputKey": "Player",
+                        "OutputValue": "Player",
+                        "Description": "Player table"
+                    },
+                    {
+                        "OutputKey": "Game",
+                        "OutputValue": "Game",
+                        "Description": "Game table"
+                    }
+                ],
+                "Tags": [],
+                "EnableTerminationProtection": false,
+                "DriftInformation": {
+                    "StackDriftStatus": "NOT_CHECKED"
                 }
-            ],
-            "Tags": [],
-            "EnableTerminationProtection": false,
-            "DriftInformation": {
-                "StackDriftStatus": "NOT_CHECKED"
             }
-        }
-    ]
+        ]
     }
-}
-    ``` 
+    ```
+
 5.  Install proyect dependencies in each subproject.
     ```
     cd lcr-client
