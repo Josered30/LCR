@@ -1,4 +1,4 @@
-# AWS/LCR Proyect
+# AWS/LCR Project
 
 ## Use Instructions
 
@@ -8,12 +8,22 @@
     ```
     aws configure
     ```
-3. Install proyect dependencies.
+3. Install proyect dependencies in each subproject.
     ```
-    npm run i
+    cd lcr-client
+    npm i
     ```
-4. Create 2 .env file in each one of the 2 sub proyects.
     ```
+    cd lcr-service
+    npm i
+    ```
+4. Create 2 .env file in each one of the 2 sub projects.
+    ```
+    touch lcr-client/.env
+    touch lct-client/.env
+    ```
+    .env
+    ```    
     REDIS_URL="redis://redis:6379"
     AWS_REGION= <aws_region>
     AWS_ACCESS_KEY= <aws_access_key_secret>
