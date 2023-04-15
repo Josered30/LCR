@@ -12,7 +12,7 @@
     ```
     aws cloudformation deploy --template-file cloudformation.yaml --stack-name lcr
     ```
-4.  Check deployment
+4.  Check the deployment
     ```
     aws cloudformation describe-stacks --stack-name lcr
     
