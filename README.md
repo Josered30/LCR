@@ -20,7 +20,7 @@
     AWS_KEY_ID= <aws_access_key_id>
     AWS_SQS_QUEUE= <aws_queue_url>
     ```
-5. Open 2 terminal instancesd.
+5. Open 2 terminal instances.
 
 6. Build and run the client application.
     ```
