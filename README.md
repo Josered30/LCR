@@ -63,7 +63,7 @@
 6.  Create 2 .env file in each one of the 2 sub projects.
     ```
     touch lcr-client/.env
-    touch lct-client/.env
+    touch lcr-client/.env
     ```
     .env
     ```
