@@ -28,7 +28,6 @@ async function saveGameOptions(): Promise<void> {
 
   // eslint-disable-next-line no-constant-condition
   while (true) {
-  
     // eslint-disable-next-line no-useless-escape
     const inputValidationRegex = /^\d\s[LR\.C]*$/gm;
     const response = (await read.question('Input: ')).toUpperCase().trim();
@@ -104,8 +103,9 @@ async function main(): Promise<void> {
     });
 
     gameData.push(new GameData(gameController.game, gameController.players));
-    await eventBridgeService.sendSQSMessage(gameData);
   });
+
+  await eventBridgeService.sendSQSMessage(gameData);
 }
 
 main();

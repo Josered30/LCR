@@ -3,7 +3,7 @@ Description: CloudFormation
 Resources:
   LcrQueue:
     Type: AWS::SQS::Queue
-
+    
   LcrEventRule:
     Type: AWS::Events::Rule
     Properties:
