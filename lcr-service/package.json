@@ -1,5 +1,5 @@
 {
-  "name": "lcr",
+  "name": "lcr-service",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,6 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",
@@ -27,5 +28,11 @@
     "prettier": "2.8.7",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.312.0",
+    "@aws-sdk/client-sqs": "^3.312.0",
+    "dotenv": "^16.0.3",
+    "uuid": "^9.0.0"
   }
 }

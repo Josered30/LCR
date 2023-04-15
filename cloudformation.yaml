@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation
+Resources:
+  LcrQueue:
+    Type: AWS::SQS::Queue
+
+  LcrEventRule:
+    Type: AWS::Events::Rule
+    Properties:
+      EventPattern:
+        source: ["lcr.events"]
+        detail-type: ["LcrEvent"]
+      Targets:
+        - Arn: !GetAtt LcrQueue.Arn
+          Id: LcrQueueTarget # set as needed
+
+  LcrQueueEventBridgePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal: { Service: events.amazonaws.com }
+            Action: SQS:SendMessage
+            Resource: !GetAtt LcrQueue.Arn
+            Condition:
+              ArnEquals: { "aws:SourceArn": !GetAtt LcrEventRule.Arn }
+      Queues:
+        - !Ref LcrQueue
+
+  GameTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Game
+      AttributeDefinitions:
+        - AttributeName: Id
+          AttributeType: S
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+        - AttributeName: Id
+          KeyType: HASH
+
+  PlayerTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Player
+      AttributeDefinitions:
+        - AttributeName: Id
+          AttributeType: S
+        - AttributeName: GameId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: Id
+          KeyType: HASH
+        - AttributeName: GameId
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: GameIndex
+          KeySchema:
+            - AttributeName: GameId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      BillingMode: PAY_PER_REQUEST
+
+Outputs:
+  Game:
+    Description: Game table
+    Value: !Ref GameTable
+  Player:
+    Description: Player table
+    Value: !Ref PlayerTable

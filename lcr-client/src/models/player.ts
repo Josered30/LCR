@@ -1,5 +1,5 @@
 export class Player {
-  constructor(public index: number, public chipsCount: number, public winner = false) {}
+  constructor(public index: number, public chipsCount: number, public gameUuid: string, public winner = false) {}
 
   addChip() {
     this.chipsCount += 1;

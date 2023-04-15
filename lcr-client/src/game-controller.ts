@@ -1,10 +1,16 @@
-import { GameRuleEnum } from './game-rules.enum';
-import { Player } from './player';
+import { Game } from './models/game';
+import { GameRuleEnum } from './models/game-rules.enum';
+import { Player } from './models/player';
+
+import { v4 as uuid } from 'uuid';
 
 export class GameController {
+  public gameUuid: string;
   public centerPile: number;
-  public players: Player[];
   public currentPlayerIndex: number;
+  public winnerPlayerIndex: number;
+
+  public players: Player[];
 
   private readonly validationRegex: RegExp;
   private readonly initialChips: number;
@@ -14,12 +20,18 @@ export class GameController {
     this.initialChips = 3;
     this.centerPile = 0;
     this.currentPlayerIndex = 0;
+    this.winnerPlayerIndex = 0;
+
+    this.gameUuid = uuid();
     // eslint-disable-next-line no-useless-escape
     this.validationRegex = /^[LR\.C]*$/gm;
   }
 
   initGame(playerCount: number): void {
-    this.players = Array.from(Array(playerCount), (_, index: number) => new Player(index, this.initialChips));
+    this.players = Array.from(
+      Array(playerCount),
+      (_, index: number) => new Player(index, this.initialChips, this.gameUuid),
+    );
   }
 
   playGame(rolls: string): void {
@@ -95,10 +107,10 @@ export class GameController {
     }
 
     if (zeroCount === this.players.length - 1) {
-      const winner = this.players.find((player) => player.chipsCount > 0);
-      console.log(winner);
-      if (winner) {
-        winner.winner = true;
+      const winnerIndex = this.players.findIndex((player) => player.chipsCount > 0);
+      if (winnerIndex !== -1) {
+        this.players[winnerIndex].winner = true;
+        this.winnerPlayerIndex = winnerIndex;
       }
       return true;
     }
@@ -108,5 +120,9 @@ export class GameController {
 
   private validateRolls(value: string) {
     return this.validationRegex.test(value);
+  }
+
+  get game() {
+    return new Game(this.gameUuid, this.winnerPlayerIndex, this.currentPlayerIndex);
   }
 }
